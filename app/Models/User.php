@@ -11,6 +11,8 @@ class User extends Authenticatable implements JWTSubject {
     use Notifiable;
 
     const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
+    const ROLE_COLLABORATOR = 'collaborator';
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +23,14 @@ class User extends Authenticatable implements JWTSubject {
         'name',
         'email',
         'password',
+        'phone',
+        'denomination',
+        'address',
+        'postal_code',
+        'nif',
+        'responsible_name',
+        'observations',
+        'id_user_type'
     ];
 
     /**
@@ -34,8 +44,14 @@ class User extends Authenticatable implements JWTSubject {
     ];
 
     public function client(){
-        //um usuario tem um tenant um para um
+        //um utilizador tem um tenant um para um
         return $this->belongsTo(Client::class);
+    }
+
+
+    public function event(){
+        // um utilizador pode ter muito eventos
+        return $this->belongsToMany(Event::class);
     }
 
     public function getJWTIdentifier() {
@@ -48,6 +64,12 @@ class User extends Authenticatable implements JWTSubject {
                 'id' => $this->id,
                 'name' => $this->name,
                 'email' => $this->email,
+                'phone' => $this->phone,
+                'denomination' => $this->denomination,
+                'address' => $this->address,
+                'nif' => $this->nif,
+                'responsible_name' => $this->responsible_name,
+                'observations' => $this->observations,
             ],
         ];
     }

@@ -46,5 +46,6 @@ Route::group([
     Route::group(['middleware' => 'can:access-admin'], function() {
         Route::get('/home', 'HomeController@index')->name('home');  // foi inserido ao adicionar o nosso auth (apenas postra se for auntenticado)
         Route::resource('banks', 'Admin\BanksController'); // Route::resouces cria as rotas todas do crud (get, update, set etc)
+        Route::resource('eventTypes', 'Admin\EventTypesController');
     });
 });

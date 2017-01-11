@@ -11,7 +11,7 @@ class BankAccountsTableSeeder extends Seeder
      */
     public function run()
     {
-        $banks = $this->getBanks();  //coleção de namcos
+        $banks = $this->getBanks();  //coleção de bancos
         $clients = $this->getClients();
         $max = 50;
         $bankAccountId = rand(1, $max);
@@ -21,7 +21,6 @@ class BankAccountsTableSeeder extends Seeder
            ->each(function($bankAccount) use ($banks, $bankAccountId, $clients){
                 $bank = $banks->random();
                 $client = $clients->random();
-
                 $bankAccount->bank_id = $bank->id;
                 $bankAccount->client_id = $client->id;
                 $bankAccount->save();

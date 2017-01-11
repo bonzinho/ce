@@ -12,7 +12,7 @@ class CreateBanksTable extends Migration {
      */
     public function up() {
         Schema::create('banks', function(Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->index();
             $table->string('name'); //nome do banco
             $table->string('logo'); //nome do arquivo
             $table->timestamps();

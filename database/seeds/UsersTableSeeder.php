@@ -22,9 +22,10 @@ class UsersTableSeeder extends Seeder
 
         foreach (range(1,50) as $value) {  // foreach para criar 50 utilizadores
             factory(\codeFin\Models\User::class,1)  // este factory cria um utilizador, o foreach é que vai fazer com que crie os vários 50*1
+                ->states('user')
                 ->create([
                     'name' => "Cliente da Silva n,º $value",
-                    'email' => "client$value@user.com"
+                    'email' => "client$value@user.com",
                     ])->each(function($user) use($clients){  // para cada utilizador criado associar um cliente
                         $client = $clients->random(); // vai buscar um client(tenant) aliatório para associas
                         $user->client()->associate($client)
